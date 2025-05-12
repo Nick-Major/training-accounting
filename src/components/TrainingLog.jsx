@@ -1,5 +1,6 @@
 import { useState } from "react";
-import DisplayWorkout from "./DisplayWorkout";
+import TrainingList from "./TrainingList";
+import editTrainingRecord from "../utils/editTrainingRecord";
 
 const TrainingLog = () => {
     const [dateValue, setDateValue] = useState('');
@@ -21,19 +22,39 @@ const TrainingLog = () => {
 
         try {
             const newTraining = {
-            date: dateValue,
-            distance: distanceValue,
-            id: Date.now(),
+                date: dateValue,
+                distance: parseFloat(distanceValue),
+                id: Date.now(),
             };
+
+            const existingRecord = training.find(item => item.date === newTraining.date);
+
+            if (!existingRecord) {
+                setTraining([...training, newTraining]);
+            } else {
+                setTraining(editTrainingRecord(existingRecord, training));
+            }
+
+            // console.log(training);
             
-            setTraining([...training, newTraining]);
             setDateValue('');
             setDistanceValue('');
             setError('');
+            
         } catch (error) {
             setError(`Ошибка!: ${error}`);
         }
     }
+
+    const handleDelete = (id) => {
+        setTraining(prev => prev.filter(item => item.id !== id));
+    };
+
+    // Функция для редактирования тренировки
+    const handleEdit = (id) => {
+        // Здесь должна быть логика редактирования
+        console.log('Редактирование тренировки с id:', id);
+    };
 
     return (
         <div className="training-log">
@@ -66,11 +87,10 @@ const TrainingLog = () => {
                 <div className="list-header">Пройдено км</div>
                 <div className="list-header">Действия</div>
             </div>
-            <div className="training-list">
-                {training.map(item => (
-                    <DisplayWorkout key={item.id} data={item} />
-                ))}
-            </div>
+            <TrainingList 
+                workouts={training}
+                onDelete={handleDelete}
+            />
         </div>
     )
 }
