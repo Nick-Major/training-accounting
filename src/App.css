@@ -1,0 +1,100 @@
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.training-log {
+  display: flex;
+  flex-direction: column;
+  min-width: 70vw;
+}
+
+.training-form {
+  display: flex;
+  justify-content: space-around;
+  align-items: end;
+  width: 100%;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-right: 20px;
+}
+
+.btn {
+  width: 20%;
+}
+
+.headers {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.training-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+  border: 2px solid black;
+  border-radius: 20px;
+}
+
+.workout {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px;
+}
+
+.edit-btn {
+  background-color: #fff;
+}
+
+.cancel-btn {
+  background-color: #fff;
+}
+
+label {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+input {
+  border: 2px solid black;
+  border-radius: 5px;
+  height: 3rem;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.btn {
+  border: 2px solid black;
+  border-radius: 5px;
+  height: 3rem;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.pencil {
+  width: 16px;
+}
+
+.cross {
+  width: 16px;
+}
