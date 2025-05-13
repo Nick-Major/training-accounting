@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TrainingList from "./TrainingList";
 import editTrainingRecord from "../utils/editTrainingRecord";
+import sortDatesDesc from "../utils/sortDatesDesc";
 
 const TrainingLog = () => {
     const [dateValue, setDateValue] = useState('');
@@ -35,7 +36,7 @@ const TrainingLog = () => {
 
             const existingRecord = training.find(item => item.date === newTraining.date);
 
-            setTraining(prev => existingRecord ? editTrainingRecord(newTraining, prev) : [...prev, newTraining]);
+            setTraining(prev => existingRecord ? editTrainingRecord(newTraining, prev).sort(sortDatesDesc) : [...prev, newTraining].sort(sortDatesDesc));
 
             setDateValue('');
             setDistanceValue('');
