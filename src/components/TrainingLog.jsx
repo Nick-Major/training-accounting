@@ -20,27 +20,26 @@ const TrainingLog = () => {
             return;
         }
 
+        const distance = parseFloat(distanceValue);
+        if (isNaN(distance)) {
+            setError('Введите корректное число для дистанции');
+            return;
+        }
+
         try {
             const newTraining = {
                 date: dateValue,
-                distance: parseFloat(distanceValue),
+                distance: distance,
                 id: Date.now(),
             };
 
             const existingRecord = training.find(item => item.date === newTraining.date);
 
-            if (!existingRecord) {
-                setTraining([...training, newTraining]);
-            } else {
-                setTraining(editTrainingRecord(existingRecord, training));
-            }
+            setTraining(prev => existingRecord ? editTrainingRecord(newTraining, prev) : [...prev, newTraining]);
 
-            // console.log(training);
-            
             setDateValue('');
             setDistanceValue('');
             setError('');
-            
         } catch (error) {
             setError(`Ошибка!: ${error}`);
         }
@@ -50,10 +49,12 @@ const TrainingLog = () => {
         setTraining(prev => prev.filter(item => item.id !== id));
     };
 
-    // Функция для редактирования тренировки
     const handleEdit = (id) => {
-        // Здесь должна быть логика редактирования
-        console.log('Редактирование тренировки с id:', id);
+        const workoutToEdit = training.find(el => el.id === id);
+        const { date, distance } = workoutToEdit;
+        setDateValue(date);
+        setDistanceValue(distance);
+        setTraining(prev => prev.filter(item => item.id !== id));
     };
 
     return (
@@ -89,6 +90,7 @@ const TrainingLog = () => {
             </div>
             <TrainingList 
                 workouts={training}
+                onEdit={handleEdit}
                 onDelete={handleDelete}
             />
         </div>

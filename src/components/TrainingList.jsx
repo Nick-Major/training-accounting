@@ -1,7 +1,7 @@
 import pencil from '../assets/pencil.png';
 import cross from '../assets/cross.png';
 
-const TrainingList = ({ workouts, onDelete }) => {
+const TrainingList = ({ workouts, onEdit, onDelete }) => {
     return (
         <div className="training-list">
             {workouts.length === 0 ? (
@@ -11,11 +11,11 @@ const TrainingList = ({ workouts, onDelete }) => {
                     {workouts.map((workout) => (
                         <div key={workout.id} className="workout">
                             <div className="date-of-trainig">{workout.date}</div>
-                            <div className="distance-traveled">{workout.distance} км</div>
+                            <div className="distance-traveled">{workout.distance}</div>
                             <div className="edit-panel">
                                 <button 
                                     className="edit-btn"
-                                    onClick={() => handleEdit(workout.id)}
+                                    onClick={() => onEdit(workout.id)}
                                 >
                                     <img className="pencil" src={pencil} alt="Редактировать" />
                                 </button>
